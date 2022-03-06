@@ -26,7 +26,7 @@ function getProjectFromPackage(packageName: string)
 	)
 
 	local err, project: Project | string = pcall(function()
-		return HttpService:JSONDecode(request(string.format("%s%s/%s/project.json", GITHUB_URL, author, repo)))
+		return HttpService:JSONDecode(request(string.format("%s%s/master/%s/project.json", GITHUB_URL, author, repo)))
 	end)
 
 	assert(not err, string.format("Failed to import package '%s'\n%s", packageName, project))
@@ -53,7 +53,9 @@ function SP:require(path: string, project: Project?)
 
 	local pathStr = table.concat(path, "/")
 	local err, module: string = pcall(function()
-		return loadstring(request(string.format("%s%s/%s/.lua", GITHUB_URL, project or self.currentProject, pathStr)))()
+		return loadstring(
+			request(string.format("%s%s/master/%s/.lua", GITHUB_URL, project or self.currentProject, pathStr))
+		)()
 	end)
 
 	assert(not err, string.format("Failed to load module '%s'\n%s", table.concat(path, "."), module))
