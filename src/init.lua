@@ -60,7 +60,7 @@ end
 
 function SP:import(packageName: string)
 	local project = getProjectFromPackage(packageName)
-	return self:require(project.init, project)
+	return self:require(project.src .. project.init, project)
 end
 
 return SP
