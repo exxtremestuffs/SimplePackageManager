@@ -53,6 +53,7 @@ end
 
 function SP:require(path, project)
 	assert(type(path) == "string", string.format("Expected string, got %s", type(path)))
+	assert(self.currentProject, "No current project set")
 	local path = {}
 	for part in path:gmatch("%.*(%a+)%.*") do
 		table.insert(path, part)
@@ -67,7 +68,7 @@ function SP:require(path, project)
 					"%s%s/%s/%s/.lua",
 					GITHUB_URL,
 					project or self.currentProject,
-					project and project.branch or "master",
+					project and project.branch or self.currentProject.branch or "master",
 					pathStr
 				)
 			)
