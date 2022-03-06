@@ -34,6 +34,8 @@ function getProjectFromPackage(packageName: string)
 	assert(type(project.author) == "string", string.format("package '%s' has no author", packageName))
 	assert(type(project.src) == "string", string.format("package '%s' has no src folder", packageName))
 	assert(type(project.init) == "string", string.format("package '%s' has no init file", packageName))
+
+	return project
 end
 
 function SP:setCurrentProject(packageName: string)
