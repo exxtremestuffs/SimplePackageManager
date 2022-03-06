@@ -1,0 +1,6 @@
+{
+    "name": "SimplePackageManager",
+    "author": "exxtremestuffs",
+    "src": "src",
+    "init": "init.lua"
+}
